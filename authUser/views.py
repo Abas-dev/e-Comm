@@ -10,6 +10,17 @@ from django.shortcuts import redirect
 class LoginUserView(LoginView):
     template_name = 'login.html'
 
+    def post(self, request, *args, **kwargs):
+        username = self.request.POST['username']
+        password = self.request.POST['password']
+        user = authenticate(username=username,password=password)
+        login(request,user)
+        messages.success(request,'you have logged in to your account')
+        return super().post(request, *args, **kwargs)
+
+class LogoutUserView(LogoutView):
+    next_page = 'auth:login'
+
 class CreateUserView(CreateView):
     template_name = 'register.html'
     form_class = UserCreationForm
@@ -26,5 +37,8 @@ class CreateUserView(CreateView):
         else:
             user = User.objects.create_user(username=username,email=email,first_name=fname,last_name=lname,password=password)
             user.save()
+            messages.success(request,'your account was created succesfully')
             return redirect('auth:login')
         return super().post(request, *args, **kwargs)
+    
+
