@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block main %}
     
-
+<form action="" method="post">
+  {% csrf_token %}
 <div class="login">
     <div class="login-screen">
       <div class="app-title">
@@ -10,39 +11,40 @@
 
       <div class="login-form">
         <div class="control-group">
-        <input type="text" class="login-field" value="" placeholder="username" id="login-name">
+        <input type="text" class="login-field" value="" placeholder="username" id="login-name" name="username" required>
         <label class="login-field-icon fui-user" for="login-name"></label>
         </div>
 
         <div class="control-group">
-            <input type="text" class="login-field" value="" placeholder="email" id="login-name">
+            <input type="text" class="login-field" value="" placeholder="email" id="login-name" name="email">
             <label class="login-field-icon fui-user" for="login-name"></label>
         </div>
 
         <div class="control-group">
-            <input type="text" class="login-field" value="" placeholder="firstname" id="login-name">
+            <input type="text" class="login-field" value="" placeholder="firstname" id="login-name" name="fName">
             <label class="login-field-icon fui-user" for="login-name"></label>
         </div>
 
         <div class="control-group">
-            <input type="text" class="login-field" value="" placeholder="lastname" id="login-name">
+            <input type="text" class="login-field" value="" placeholder="lastname" id="login-name" name="lName">
             <label class="login-field-icon fui-user" for="login-name"></label>
         </div>
 
         <div class="control-group">
-        <input type="password" class="login-field" value="" placeholder="password" id="login-pass">
+        <input type="password" class="login-field" value="" placeholder="password" id="login-pass" name="password1">
         <label class="login-field-icon fui-lock" for="login-pass"></label>
         </div>
 
         <div class="control-group">
-            <input type="text" class="login-field" value="" placeholder="password confirm" id="login-pass">
+            <input type="password" class="login-field" value="" placeholder="password confirm" id="login-pass" name="password2">
             <label class="login-field-icon fui-user" for="login-name"></label>
         </div>
 
-        <a class="btn btn-primary btn-large btn-block" href="#">Create account  </a>
-        <a class="login-link" href="#">login your account</a>
+        <input type="submit" class="btn btn-primary btn-large btn-block" placeholder="Create account">
+        
+        <a class="login-link" href="{% url 'auth:login' %}">login your account</a>
       </div>
     </div>
   </div>
-
+</form>
   {% endblock %}
