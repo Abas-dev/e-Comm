@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 class LoginUserView(LoginView):
@@ -18,7 +20,7 @@ class LoginUserView(LoginView):
         messages.success(request,'you have logged in to your account')
         return super().post(request, *args, **kwargs)
 
-class LogoutUserView(LogoutView):
+class LogoutUserView(LoginRequiredMixin,LogoutView):
     next_page = 'auth:login'
 
 class CreateUserView(CreateView):

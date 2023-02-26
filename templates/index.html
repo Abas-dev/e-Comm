@@ -3,7 +3,12 @@
   <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
   <div class="container text-center text-md-left" data-aos="fade-up">
-    <h1>Welcome to <span>Grace Mart</span></h1> <br>
+    {% if request.user.is_authenticated %}
+      <h1>Welcome to <span>Grace Mart </span>{{request.user}}</h1> <br>
+    {% else %}
+      <h1>Welcome to <span>Grace Mart </span></h1> <br>
+    {% endif %}
+    
     <h2> Your one stop e-market</h2>
     <a href="#" class="btn-get-started scrollto">Go to shop</a>
       
