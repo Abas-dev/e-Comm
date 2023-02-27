@@ -8,7 +8,18 @@
       <div class="app-title">
         <h1>Login your account</h1>
       </div>
+      {% if  messages  %}
 
+    {% for message in messages  %}
+      <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+          <p>{{message}}</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+
+  {% endif %}
       <div class="login-form">
         <div class="control-group">
         <input type="text" class="login-field" value="" placeholder="username" id="login-name" name="username">

@@ -17,12 +17,16 @@ class LoginUserView(LoginView):
         password = self.request.POST['password']
         user = authenticate(username=username,password=password)
         login(request,user)
-        messages.success(request,'you have logged in to your account')
+        messages.success(request,'you have logged into your account')
         return super().post(request, *args, **kwargs)
 
 class LogoutUserView(LoginRequiredMixin,LogoutView):
     next_page = 'auth:login'
 
+    def post(self, request, *args, **kwargs):
+        messages.success(request,message='you have logged out of your account')
+        return super().post(request, *args, **kwargs)
+    
 class CreateUserView(CreateView):
     template_name = 'register.html'
     form_class = UserCreationForm
@@ -39,8 +43,8 @@ class CreateUserView(CreateView):
         else:
             user = User.objects.create_user(username=username,email=email,first_name=fname,last_name=lname,password=password)
             user.save()
-            messages.success(request,'your account was created succesfully')
             return redirect('auth:login')
+        messages.success(request,'your account was created succesfully')
         return super().post(request, *args, **kwargs)
     
 

@@ -19,6 +19,18 @@
 
 {% block main %}
   <!-- ======= What We Do Section ======= -->
+  {% if  messages  %}
+
+    {% for message in messages  %}
+      <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+          <p>{{message}}</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+
+  {% endif %}
   <section id="what-we-do" class="what-we-do">
     <div class="container">
 
